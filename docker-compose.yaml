@@ -1,0 +1,15 @@
+version: "3.4"
+services:
+    tarpit:
+        build: .
+        environment:
+          - IP_ADDRESS=0.0.0.0
+          - INTERVAL=4.0
+          - UID=1000
+          - GID=1000
+          # - DUALSTACK=-D
+        ports:
+          - "2222:22"
+        volumes:
+          - ./tarpit/:/home/
+        restart: unless-stopped
