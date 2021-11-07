@@ -12,5 +12,5 @@ services:
         ports:
           - "2222:22"
         volumes:
-          - ./tarpit/:/home/
+          - ./tarpit/:/home/ssh/
         restart: unless-stopped
