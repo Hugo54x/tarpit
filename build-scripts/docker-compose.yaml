@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  tarpit-armv5:
+    platform: linux/arm/v5
+    image: &image
+      hugo54x/tarpit:latest
+    build:
+      context: ../Dockerfiles
+      dockerfile: Dockerfile.armv5
+      args: &build_args
+        PYTHON_VERSION: 3.7
+      x-bake:
+        platforms: ["linux/arm/v5"]
+        
+  tarpit-armv6:
+    platform: linux/arm/v6
+    image: *image
+    build:
+      context: ../Dockerfiles
+      dockerfile: Dockerfile.armv6
+      args: *build_args
+    x-bake:
+      platforms: ["linux/arm/v6"]
+
+  tarpit-armv7:
+    platform: linux/arm/v7
+    image: *image
+    build:
+      context: ../Dockerfiles
+      dockerfile: Dockerfile.armv7
+      args: *build_args
+    x-bake:
+      platforms: ["linux/arm/v7"]
+
+  tarpit-armv8:
+    platform: linux/arm/v8
+    image: *image
+    build:
+      context: ../Dockerfiles
+      dockerfile: Dockerfile.armv8
+      args: *build_args
+    x-bake:
+      platforms: ["linux/arm64"]
+
+  tarpit-x64:
+    image: *image
+    build:
+      context: ../Dockerfiles
+      dockerfile: Dockerfile.x64
+      args: *build_args
+      x-bake:
+        platforms: ["linux/amd64"]
