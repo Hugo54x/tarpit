@@ -1,0 +1,32 @@
+version: "3.4"
+
+services:
+  tarpit:
+    image: hugo54x/tarpit:latest
+    environment:
+      - IP_ADDRESS=0.0.0.0
+      - INTERVAL=4.0
+      - UID=1000
+      - GID=1000
+      # - DUALSTACK=-D
+      - TZ=Europe/Berlin
+    ports:
+      - "2222:22"
+    volumes:
+      - ./tarpit/:/home/ssh/
+    networks: 
+      - tarpit
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+        reservations:
+          memory: 32M
+      placement:
+        constraints:
+          - node.hostname == hostnameOfNode
+
+networks:
+  tarpit:
+    driver: overlay
+    
